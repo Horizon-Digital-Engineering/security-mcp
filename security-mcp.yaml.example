@@ -1,0 +1,44 @@
+# security-mcp configuration
+# Copy this file to security-mcp.yaml and edit as needed.
+# The server looks for security-mcp.yaml in the current working directory,
+# then walks up to the repo root.
+
+adapters:
+  sonar:
+    enabled: true
+    # "cloud" uses SONAR_TOKEN + SONAR_HOST_URL + SONAR_PROJECT_KEY env vars.
+    # "cli" shells out to sonar-scanner and then fetches results via API.
+    mode: cloud           # cloud | cli
+    # projectKey: my-org_my-project   # overrides SONAR_PROJECT_KEY env var
+    # hostUrl: https://sonarcloud.io  # overrides SONAR_HOST_URL env var
+
+  snyk:
+    enabled: false
+    mode: cloud           # cloud | cli
+    # orgId: my-snyk-org-id
+
+  semgrep:
+    enabled: false
+    mode: cli             # cloud | cli
+    # deploymentId: 12345 # required for cloud mode
+
+  trivy:
+    enabled: false
+    mode: cli             # cli only (no official cloud API yet)
+    # scanTarget: .       # path to scan; defaults to cwd
+
+  gosec:
+    enabled: false
+    mode: cli             # cli only
+
+  npm-audit:
+    enabled: false
+    mode: cli             # cli only
+    # auditLevel: high    # low | moderate | high | critical
+
+# Global filters applied after each adapter returns results.
+filters:
+  minSeverity: low        # critical | high | medium | low | info
+  statuses:               # only return issues with these statuses
+    - open
+    - acknowledged

@@ -1,0 +1,10 @@
+dist/
+node_modules/
+.pnpm-store/
+security-mcp.yaml
+*.local.yaml
+coverage/
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
